@@ -1,6 +1,6 @@
 Function.prototype.myBind = function(currThis,...args){
 
-    const myFunc = this;
+    const myFunc = this; // this represent the current function who calls myBind method
     return function(...args2){
         myFunc.apply(currThis, [...args,...args2])
     }

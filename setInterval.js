@@ -1,6 +1,6 @@
 const {customSetTimeInterval,customClearTimeInterval}=(function(){
 
-    let timerId=0;  // timer id is for each ssetTimeout function 
+    let timerId=0;  // timer id is for each setTimeInterval function 
     let timerMap = {}  // monitoring whether the timeout is not clear if clear don't call
 
     function customSetTimeInterval(cb,delay,...args){
@@ -10,11 +10,11 @@ const {customSetTimeInterval,customClearTimeInterval}=(function(){
             timerMap[timerId] = true; // add the current timout to map
             let _myt_id = timerId;  // track own timer id for checking
             timerId++;
-            let callTime = Date.now() // time when setTimeout gets called;
+            let callTime = Date.now() // time when setTimeInterval gets called;
             let myThis = this;
             function trigger(){
                 if(delay+callTime<Date.now()){
-                    if(!timerMap[_myt_id]) return; // if timeout is clear
+                    if(!timerMap[_myt_id]) return; // if timeInterval is clear
                     cb.apply(myThis,args);
                     callTime = Date.now(); // reset call time to curr so that curr + delay updated
                     requestIdleCallback(trigger)
